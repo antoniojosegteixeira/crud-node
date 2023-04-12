@@ -1,10 +1,12 @@
 import db from "./db/db.js";
 import router from "./routes/index.js";
 import express from "express";
+import cors from "cors";
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 (async () => {
   try {
@@ -15,4 +17,4 @@ app.use(express.urlencoded({ extended: true }));
 })();
 
 app.use("/", router);
-app.listen(3000, () => console.log("Server started on port 3000"));
+app.listen(4000, () => console.log("Server started on port 4000"));

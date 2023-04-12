@@ -12,12 +12,12 @@ export const readProductController = async (req, res) => {
 };
 
 export const addProductController = async (req, res) => {
-  const { clientName, date, deliveryDate, status } = req.body;
+  const { clientName, orderDate, deliveryDate, status } = req.body;
   try {
     await database.sync();
     const products = await Product.create({
       clientName,
-      date,
+      orderDate,
       deliveryDate,
       status,
     });
@@ -30,13 +30,13 @@ export const addProductController = async (req, res) => {
 };
 
 export const updateProductController = async (req, res) => {
-  const { id, clientName, date, deliveryDate, status } = req.body;
+  const { id, clientName, orderDate, deliveryDate, status } = req.body;
   try {
     await database.sync();
 
     const product = await Product.findByPk(id);
     if (clientName) product.clientName = clientName;
-    if (date) product.date = date;
+    if (orderDate) product.orderDate = orderDate;
     if (deliveryDate) product.deliveryDate = deliveryDate;
     if (status) product.status = status;
 
@@ -49,13 +49,15 @@ export const updateProductController = async (req, res) => {
 };
 
 export const deleteProductController = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
+
+  console.log(Object.entries(req));
   try {
     await database.sync();
 
     const product = await Product.findByPk(id);
     product.destroy();
-    res.status(200).send();
+    res.status(200).send(`Deleted ${id}`);
   } catch (error) {
     res.send(error);
   }

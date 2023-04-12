@@ -14,6 +14,6 @@ router.post("/add-product", addProductController);
 
 router.put("/edit-product", updateProductController);
 
-router.delete("/delete-product", deleteProductController);
+router.delete("/delete-product/:id", deleteProductController);
 
 export default router;

@@ -12,7 +12,7 @@ const Product = database.define("product", {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  date: {
+  orderDate: {
     type: Sequelize.STRING,
     allowNull: false,
   },
